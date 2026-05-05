@@ -1,13 +1,27 @@
 
-ion-header,ion-footer{
-    ion-toolbar{
-     --background:#0163aa;
-    }
-   }
 
-ion-header ion-toolbar h5{
-    margin:auto 0;
+ion-title.employees-details-title  {
+    font-weight:600;
+    font-size:clamp(0.98em, 1.2vw, 1.5em);
+    color:#2880bb;
+
 }
+
+.toolbar-title {
+    margin-top: 5px!important;
+}
+
+ion-buttons ion-button{
+    height:44px;
+}
+
+
+.edit-form-header{
+    font-weight: bold;
+    margin-bottom: 0.75em;
+    color: #383838;
+}
+
 
 ion-checkbox {
     --size: 1.5em;
@@ -21,9 +35,13 @@ ion-checkbox::part(container) {
     border: 2px solid #28bb50;
 }
 
-
-
 ion-content.detailForm{
     --background: white!important;
     --color:black;
   }
+
+
+  ion-note{
+    font-size: .8em;
+  }
+

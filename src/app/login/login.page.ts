@@ -6,6 +6,7 @@ import {
   IonToolbar, IonInput,IonInputPasswordToggle, IonToast, IonButton } from '@ionic/angular/standalone';
 import { BiometryType, NativeBiometric } from 'capacitor-native-biometric';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-login',
@@ -15,19 +16,19 @@ import { ActivatedRoute, Router } from '@angular/router';
   imports: [IonButton, IonToast, IonToast, IonInput, IonInputPasswordToggle, IonContent, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
+
   data: { email: string; password: string; } = {email:"",password:""}
   isToast = false;
   toastMessage!: string;
   isPwd = false;
   server = 'www.goitseonekau-webdev.com';
-  errorLogin = ""
-  loginForm!:NgForm
-  constructor(private router:Router,private activeRoute:ActivatedRoute) { 
-   
-  }
+  errorLogin = "";
+  loginForm!:NgForm;
+
+  constructor(private router:Router,private activeRoute:ActivatedRoute) { }
 
   ngOnInit() {
-    if(this.router.navigated){
+    if(this.router.navigated && this.loginForm){
       this.loginForm.resetForm()
     }
   }
@@ -37,7 +38,15 @@ export class LoginPage implements OnInit {
       form.control.markAllAsTouched()
       return
     }
-    this.performBiometricVerification()
+
+    if(Capacitor.getPlatform()=="web"){
+      this.router.navigate(['home'])
+      return
+    }else{
+      this.performBiometricVerification()
+    }
+    
+    
   }
 
   register(form:NgForm){
@@ -52,12 +61,16 @@ export class LoginPage implements OnInit {
   async performBiometricVerification() {
     try {
       const result = await NativeBiometric.isAvailable({ useFallback: true });
-      if (!result.isAvailable) return;
+      if (!result.isAvailable){ 
+        this.router.navigate(['home'])
+        return;
+      }
 
       const isFingerPrint = result.biometryType == BiometryType.FINGERPRINT;
-      console.log(isFingerPrint);
+      let verified: boolean = false;
 
-      const verified = await NativeBiometric.verifyIdentity({
+      if (isFingerPrint) {
+        verified = await NativeBiometric.verifyIdentity({
         reason: 'Authentication',
         title: 'Log in',
         subtitle: 'FINGER PRINT',
@@ -65,8 +78,8 @@ export class LoginPage implements OnInit {
         useFallback: true,
         maxAttempts: 2,
       })
-        .then(() => true)
-        .catch(() => false);
+      .then(() => true)
+      .catch(() => false);
 
       
 
@@ -78,9 +91,10 @@ export class LoginPage implements OnInit {
           this.errorLogin = "Failed to login. No such credentials"
           return
         };
+      }
       
     } catch (e) {
-      console.log(e);
+      console.log("No biometri");
     }
   }
 
@@ -94,6 +108,7 @@ export class LoginPage implements OnInit {
         password: data.password,
         server: this.server,
       });
+      this.data={email:data.email,password:data.password}
     } catch (e) {
       console.log(e);
     }

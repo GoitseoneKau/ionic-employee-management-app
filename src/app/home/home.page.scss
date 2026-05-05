@@ -1,154 +1,432 @@
-.logout{
+/* ========================================
+   Custom CSS Variables
+   ======================================== */
+:host {
+  --primary-color: #0163aa;
+  --success-color: #28bb50;
+  --danger-color: #c5000f;
+  --text-light: #525252;
+}
+
+// Global styles for the home page, including list item styles, avatar styles, and responsive design adjustments
+$item-header: 0.9em;
+$item-content: 0.69em;
+$item-active: 0.67em;
+
+// ion-modal#add-modal ion-header {
+//   padding-top: 50px;
+// }
+
+/* ========================================
+   Logout Button Styles
+   ======================================== */
+.logout,
+.logout ion-button {
   width: 100%;
   height: 100%;
-  ion-button{
+}
+
+.logout ion-button {
+  margin-inline: 0;
+}
+
+.logout-item {
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-start: 0;
+}
+
+/* ========================================
+   Add Button Styles
+   ======================================== */
+.addBtn {
+  background-color: white !important;
+  height: 44px;
+
+  ion-button {
     height: 100%;
-    width: 100%;
-    -webkit-margin-start: 0; 
-    margin-inline-start: 0; 
-    -webkit-margin-end: 0; 
-    margin-inline-end: 0;
-    background-color: white;
-    color:black;
   }
 }
 
-.logout-item{
-  
-    --inner-padding-end: 0px;
-    --inner-padding-start:0;
-  
-    --padding-start: 0;
+/* ========================================
+   Menu and Content Styles
+   ======================================== */
+ion-menu ion-content,
+ion-title {
+  color: white;
 }
 
-ion-menu{
-  ion-content{
-    --background:#0163aa;
-  }
+ion-menu ion-content {
+  --background: var(--primary-color);
 }
 
-ion-content.addForm{
-  --background: white!important;
-  --color:black;
+ion-content.addForm {
+  --background: white !important;
+  --color: black;
 }
 
-
+/* ========================================
+   FAB (Floating Action Button) Styles
+   ======================================== */
 ion-fab {
   margin-top: var(--ion-safe-area-top, 0);
 }
 
-
-ion-header,ion-footer{
- ion-toolbar{
-  --background:#0163aa;
- }
+/* ========================================
+   Header and Footer Toolbar Styles
+   ======================================== */
+ion-header ion-toolbar,
+ion-footer ion-toolbar {
+  --color: white;
 }
 
-ion-toolbar{
-  --background:white;
-  ion-searchbar{
-    --background:white;
-    --color:black;
-    --icon-color:black;
-    --clear-button-color:red;
-   
+.app-title {
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0;
+  margin: 0 1em  0 0;
+}
+
+/* ========================================
+   Toolbar and Searchbar Styles
+   ======================================== */
+ion-card {
+  ion-toolbar {
+  --background: #0288d1;
+
+  ion-searchbar {
+    --background: white;
+    --color: black;
+    --icon-color: black;
+    --clear-button-color: var(--danger-color);
+    padding: 0.5em;
   }
 }
-
-ion-title{
-  color:white;
 }
 
+ion-title {
+  font-size: 1em;
+  text-align: center;
+}
+
+/* ========================================
+   Modal Toolbar Styles
+   ======================================== */
+ion-toolbar.add-modal-toolbar {
+  padding: 0;
+  box-shadow: black 1px 1px 4px;
+}
+
+/* ========================================
+   Modal Backdrop Styles
+   ======================================== */
 ion-modal {
-  --backdrop-opacity:20%;
+  --backdrop-opacity: 20%;
+  padding-top: 2em;
 }
 
-ion-toolbar:has(ion-radio){
-  display: grid;
-  grid-template-columns: auto;
-  justify-items: center;
-  justify-content: center;
-
-  ion-radio{
-    padding: 0 .3em;
-    justify-self: center;
-    --color:white;
-    --color-checked:#28bb50;
-    font-weight: bold;
-  }
-}
-
+/* ========================================
+   List Styles
+   ======================================== */
 ion-list {
-  padding: 0.2em;
-  background-color: rgb(24, 123, 216);
+  padding: 0 0.5em;
+
   ion-list-header {
     color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
+
   ion-item-sliding {
     width: 100%;
 
+    /* ========================================
+   List Item Styles
+   ======================================== */
+
     ion-item {
       display: flex;
-    
-      --inner-padding-end: 0px;
-      --inner-padding-start:2px;
-    
-      --padding-start: 2px;
+      justify-content: space-evenly;
+      gap: 0.2em;
       width: 100%;
-      --background:white;
+      --inner-padding-end: 0px;
+      --inner-padding-start: 2px;
+
+      --padding-start: 2px;
+
+      --background: white;
 
       ion-label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1em;
         padding-right: 0px;
+        width: 100%;
         max-width: 100%;
-        width: max-content;
-        p,
+        -webkit-margin-end: 0;
+        margin-inline-end: 0;
+
         ion-text {
-          display: inline-block;
-          padding-left: 2px;
+          font-size: $item-header;
+          font-weight: bold;
+          text-wrap: nowrap;
           width: 100%;
         }
-        ion-text,p>*{
-          color: black;
+
+        .emp_details {
+          display: flex;
+          flex-direction: column;
+          gap: 0.2em;
+          width: 100%;
+          p {
+            margin: 0;
+            line-height: normal;
+          }
+
+          div.emp_id_dept {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2em;
+            max-width: 100%;
+            width: max-content;
+
+            p {
+              font-size: var($item-content);
+              color: #252525;
+            }
+          }
+
+          p.position {
+            font-size: var($item-content);
+          }
         }
       }
 
-      ion-label:nth-child(3) {
-        max-width: 15%;
-        width: min-content;
-        display: inline-flex;
-        justify-content: center;
+      ion-label.active_status {
+        display: flex;
+        padding: 0 0.25em;
+        width: min-content !important;
+        max-width: min-content !important;
+        margin: 0;
+
+        ion-text {
+          text-align: center;
+          font-size: var($item-active);
+          line-height: normal;
+        }
       }
 
-      div {
+      div.active_status_color {
         height: 100%;
-        width: 1em;
+        width: 0.45em;
         justify-self: right;
+      }
+
+      @media screen and (min-width: 320px) {
+        ion-label {
+          ion-text {
+            font-size: calc($item-header * 1);
+          }
+
+          .emp_details {
+            div.emp_id_dept {
+              p {
+                font-size: calc($item-content * 1);
+              }
+            }
+
+            p.position {
+              font-size: calc($item-content * 1);
+            }
+          }
+        }
+
+        ion-label.active_status {
+          padding: 0 0.3em;
+          ion-text {
+            font-size: calc($item-active * 1);
+          }
+        }
+
+        div.active_status_color {
+          width: 0.5em;
+        }
+      }
+
+      @media screen and (min-width: 375px) {
+        ion-label {
+          ion-text {
+            font-size: calc($item-header * 1.07);
+          }
+
+          .emp_details {
+            div.emp_id_dept {
+              flex-direction: row;
+              gap: 0.5em;
+              p {
+                font-size: calc($item-content * 1.05);
+              }
+            }
+
+            p.position {
+              font-size: calc($item-content * 1.05);
+            }
+          }
+        }
+
+        ion-label.active_status {
+          padding: 0 0.35em;
+          ion-text {
+            text-align: center;
+            font-size: calc($item-active * 1.05);
+          }
+        }
+
+        div.active_status_color {
+          width: 0.55em;
+        }
+      }
+
+      @media screen and (min-width: 425px) {
+        ion-label {
+          ion-text {
+            font-size: calc($item-header * 1.095);
+          }
+
+          .emp_details {
+            div.emp_id_dept {
+              p {
+                font-size: calc($item-content * 1.095);
+                b {
+                  font-weight: 600;
+                }
+              }
+            }
+
+            p.position {
+              font-size: calc($item-content * 1.095);
+              b {
+                font-weight: 600;
+              }
+            }
+          }
+        }
+
+        ion-label.active_status {
+          padding: 0 0.4em;
+
+          ion-text {
+            font-size: calc($item-active * 1.095);
+          }
+        }
+
+        div.active_status_color {
+          width: 0.6em;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        ion-label {
+          ion-text {
+            font-size: calc($item-header * 1.5);
+          }
+
+          .emp_details {
+            flex-direction: row;
+            gap: 0.5em;
+
+            div.emp_id_dept {
+              p {
+                font-size: calc($item-content * 1.5);
+              }
+            }
+
+            p.position {
+              font-size: calc($item-content * 1.5);
+            }
+          }
+        }
+
+        ion-label.active_status {
+          padding: 0 0.4em;
+
+          ion-text {
+            font-size: calc($item-active * 1.5);
+          }
+        }
+
+        div.active_status_color {
+          width: 0.65em;
+        }
       }
     }
   }
 }
 
+/* ========================================
+   Avatar Styles
+   ======================================== */
+
+ion-avatar {
+  --background: transparent;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  width: max-content;
+  height: 100%;
+  margin-right: 0;
+
+  // icon avarta styles and media queries for responsiveness
+  ion-icon {
+    font-size: 3em;
+    color: #0163aa;
+  }
+
+  //small mobile
+  @media screen and (min-width: 320px) {
+    ion-icon {
+      font-size: 3.2em;
+    }
+  }
+
+  //medium mobile
+  @media screen and (min-width: 375px) {
+    ion-icon {
+      font-size: 3.5em;
+    }
+  }
+
+  //large mobile
+  @media screen and (min-width: 425px) {
+    ion-icon {
+      font-size: 3.7em;
+    }
+  }
+}
+
+.btn-menu {
+  --background: transparent;
+  --color: white;
+}
+
 .active {
-  background-color: #28bb50;
+  background-color: var(--success-color);
 }
 
 .inactive {
-  background-color: #c5000f;
+  background-color: var(--danger-color);
 }
 
 .active-text {
-  color: #28bb50 !important;
+  color: var(--success-color) !important;
   font-size: 0.85em;
   font-weight: bold;
-  width: 100%;
 }
 
 .inactive-text {
-  color: #c5000f!important;
+  color: var(--danger-color) !important;
   font-size: 0.85em;
-  font-weight: bold;
+  font-weight: normal;
   text-wrap: nowrap;
-  width: 100%;
+  text-decoration: line-through;
 }
-
-

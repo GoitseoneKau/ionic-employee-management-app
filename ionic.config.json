@@ -1,7 +1,10 @@
 {
   "name": "ionic_emp_management",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {
+      "plugins": {
+      }
+    }
   },
   "type": "angular-standalone"
 }
